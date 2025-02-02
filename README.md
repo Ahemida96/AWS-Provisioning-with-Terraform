@@ -67,7 +67,5 @@ This project utilizes several AWS services to ensure high availability and scala
 - **Subnets**: Divides the VPC into smaller network segments.
 - **Security Groups**: Acts as a virtual firewall to control inbound and outbound traffic for your instances.
 - **EC2 Instances**: Virtual servers to run your applications.
-- **RDS (Relational Database Service)**: Managed relational database service for storing application data.
-- **S3 (Simple Storage Service)**: Scalable storage for storing application assets and backups.
 
 These services work together to create a highly available and scalable environment for hosting the Apache web server.
