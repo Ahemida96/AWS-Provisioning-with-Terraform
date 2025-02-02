@@ -6,7 +6,7 @@ The aim of this project is to automate the provisioning of AWS infrastructure us
 
 ## Architecture
 
-![Architecture Diagram](assets/Architecture.png)
+![Architecture Diagram](assets/Architecture.jpg)
 
 ## Steps to Provision AWS Infrastructure
 
