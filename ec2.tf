@@ -39,41 +39,23 @@ data "aws_ami" "amazon_linux" {
   owners = ["137112412989"] # Amazon
 }
 
-
-# resource "aws_instance" "private_instance1" {
-#   ami             = data.aws_ami.ubuntu.id
-#   instance_type   = var.instance_type
-#   subnet_id       = aws_subnet.private_subnet1.id
-#   security_groups = [aws_security_group.sg-1.id]
-#   key_name        = var.key_name
-#   user_data       = <<-EOF
-#                     #!/bin/bash
-#                     sudo yum update -y
-#                     sudo yum install -y httpd
-#                     sudo systemctl start httpd
-#                     sudo systemctl enable httpd
-#                     echo ?Hello World from $(hostname -I)? > /var/www/html/index.html
-#                     EOF
-#   tags = {
-#     Name = "private-instance1"
-#   }
-# }
-
-# resource "aws_instance" "private_instance2" {
-#   ami             = data.aws_ami.ubuntu.id
-#   instance_type   = var.instance_type
-#   subnet_id       = aws_subnet.private_subnet2.id
-#   security_groups = [aws_security_group.sg-2.id]
-#   user_data       = <<-EOF
-#                     #!/bin/bash
-#                     sudo yum update -y
-#                     sudo yum install -y httpd
-#                     sudo systemctl start httpd
-#                     sudo systemctl enable httpd
-#                     echo ?Hello World from $(hostname -I)? > /var/www/html/index.html
-#                     EOF
-#   key_name        = var.key_name
-#   tags = {
-#     Name = "private-instance2"
-#   }
-# }
+/*
+resource "aws_instance" "private-instance" {
+  ami             = data.aws_ami.ubuntu.id
+  instance_type   = var.instance_type
+  subnet_id       = aws_subnet.private_subnet1.id
+  security_groups = [aws_security_group.sg.id]
+  key_name        = var.key_name
+  user_data       = <<-EOF
+                    #!/bin/bash
+                    sudo yum update -y
+                    sudo yum install -y httpd
+                    sudo systemctl start httpd
+                    sudo systemctl enable httpd
+                    echo ?Hello World from $(hostname -I)? > /var/www/html/index.html
+                    EOF
+  tags = {
+    Name = "private-instance"
+  }
+}
+*/

@@ -3,7 +3,7 @@ resource "aws_launch_configuration" "ec2-config" {
   image_id      = data.aws_ami.amazon_linux.id
   instance_type = var.instance_type
   security_groups = [
-    aws_security_group.sg.id
+    aws_security_group.ec2-sg.id
   ]
   key_name = var.key_name
   lifecycle {
@@ -46,22 +46,9 @@ resource "aws_autoscaling_group" "asg" {
     value               = "dev"
     propagate_at_launch = true
   }
-  tag {
-    key                 = "Project"
-    value               = "megasecret"
-    propagate_at_launch = true
-  }
   lifecycle {
     create_before_destroy = true
   }
-}
-
-resource "aws_autoscaling_policy" "asg-policy" {
-  name                   = "terraform-asg-policy"
-  scaling_adjustment     = 1
-  adjustment_type        = "ChangeInCapacity"
-  cooldown               = 300
-  autoscaling_group_name = aws_autoscaling_group.asg.name
 }
 
 resource "aws_autoscaling_policy" "asg-policy-down" {

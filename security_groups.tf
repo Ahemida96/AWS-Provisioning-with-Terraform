@@ -1,4 +1,4 @@
-resource "aws_security_group" "sg" {
+resource "aws_security_group" "ec2-sg" {
   vpc_id = aws_vpc.main.id
   ingress {
     from_port   = 80
@@ -19,7 +19,7 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "Security Group"
+    Name = "EC2 Instances Security Group"
   }
 
 }

@@ -5,14 +5,14 @@ resource "aws_lb" "load-balancer" {
   security_groups    = [aws_security_group.lb_sg.id]
   subnets            = [aws_subnet.public_subnet1.id, aws_subnet.public_subnet2.id]
 
-  enable_deletion_protection = true
-
-  #   access_logs {
-  #     bucket  = aws_s3_bucket.lb_logs.id
-  #     prefix  = "lb"
-  #     enabled = true
-  #   }
-
+  enable_deletion_protection = false
+  /*
+  access_logs {
+    bucket  = aws_s3_bucket.lb_logs.id
+    prefix  = "lb"
+    enabled = true
+  }
+*/
   tags = {
     Environment = "env"
   }
@@ -31,7 +31,8 @@ resource "aws_lb_target_group" "target-group" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 4
-    interval            = 5
+    interval            = 30
+    matcher             = "200"
   }
 }
 
@@ -46,48 +47,3 @@ resource "aws_lb_listener" "listener" {
   }
 }
 
-resource "aws_lb_listener_rule" "rule" {
-  listener_arn = aws_lb_listener.listener.arn
-
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.target-group.arn
-  }
-
-  condition {
-    host_header {
-      values = ["example.com"]
-    }
-  }
-}
-
-
-# resource "aws_lb_listener_rule" "rule2" {
-#   listener_arn = aws_lb_listener.listener.arn
-
-#   action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.target-group.arn
-#   }
-
-#   condition {
-#     path_pattern {
-#       values = ["/test"]
-#     }
-#   }
-# }
-
-# resource "aws_lb_listener_rule" "rule3" {
-#   listener_arn = aws_lb_listener.listener.arn
-
-#   action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.target-group.arn
-#   }
-
-#   condition {
-#     path_pattern {
-#       values = ["/test2"]
-#     }
-#   }
-# }
