@@ -45,7 +45,7 @@ resource "aws_instance" "private-instance" {
   instance_type   = var.instance_type
   subnet_id       = aws_subnet.private_subnet1.id
   security_groups = [aws_security_group.sg.id]
-  key_name        = var.key_name
+  key_name        = aws_key_pair.key-pair.key_name
   user_data       = <<-EOF
                     #!/bin/bash
                     sudo yum update -y

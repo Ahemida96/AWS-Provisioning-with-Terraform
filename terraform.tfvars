@@ -11,5 +11,3 @@ private_subnets = ["private_subnet1", "private_subnet2"]
 availability_zones = ["us-east-1a", "us-east-1b"]
 
 instance_type = "t2.micro"
-
-key_name = "terraform"
