@@ -42,7 +42,7 @@ The aim of this project is to automate the provisioning of AWS infrastructure us
 ![Infrastructure Graph](assets/infrastructure-graph.svg)
 
 ## Load Balancing Across Auto Scaling Taregeted Groups
-![Result](assets/Requests_Results.png)
+![Requests Result](Results/Requests_Results.png)
 
 ## Cleanup
 
