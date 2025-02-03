@@ -37,9 +37,12 @@ The aim of this project is to automate the provisioning of AWS infrastructure us
 
 7. **Verify the Infrastructure**: Verify that the infrastructure has been provisioned correctly by logging into the AWS Management Console.
 
-## Graph
+## Infrastructure Graph
 
 ![Infrastructure Graph](assets/infrastructure-graph.svg)
+
+## Load Balancing Across Auto Scaling Taregeted Groups
+![Result](assets/Requests_Results.png)
 
 ## Cleanup
 
