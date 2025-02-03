@@ -18,12 +18,16 @@ resource "aws_launch_configuration" "ec2-config" {
   user_data = <<-EOF
                 #!/bin/bash
                 sudo yum update -y
-                sudo yum install -y httpd
+                sudo yum install -y httpd # Ubuntu -> Apache2
                 sudo systemctl start httpd
                 sudo systemctl enable httpd
-                echo "Hello World from $(hostname -I)" > /var/www/html/index.html
+                echo "Hello World From Host: $(hostname -I)" > /var/www/html/index.html
                 EOF
-  # Add the following provisioner block to the aws_launch_configuration resource to install the httpd package on the EC2 instances:
+
+  provisioner "file" {
+    source      = "./assets/index.html"
+    destination = "/var/www/html/index.html"
+  }
   /*
   provisioner "remote-exec" {
     inline = [
@@ -33,13 +37,13 @@ resource "aws_launch_configuration" "ec2-config" {
       "sudo systemctl enable httpd",
   ]
   */
-
-  # Add the following provisioner block to the aws_launch_configuration resource to copy the index.html file to the EC2 instances:
-  provisioner "file" {
-    source      = "index.html"
-    destination = "/var/www/html/index.html"
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = tls_private_key.private_key.private_key_pem
+    host        = self.public_ip
+    timeout     = "5m"
   }
-
 }
 
 resource "aws_autoscaling_group" "asg" {
